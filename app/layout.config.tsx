@@ -1,12 +1,12 @@
 import { type DocsLayoutProps } from "fumadocs-ui/layouts/docs"
-import { type HomeLayoutProps } from "fumadocs-ui/layouts/home"
+import { type BaseLayoutProps } from "fumadocs-ui/layouts/shared"
 
 import { source } from "@/lib/source"
 
-export const baseOptions: HomeLayoutProps = {
+export const baseOptions: BaseLayoutProps = {
   nav: {
     title: "Aelluminate",
-    transparentMode: "always",
+    transparentMode: "top",
   },
 }
 
