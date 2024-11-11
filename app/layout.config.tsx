@@ -6,7 +6,7 @@ import { source } from "@/lib/source"
 export const baseOptions: HomeLayoutProps = {
   nav: {
     title: "Aelluminate",
-    transparentMode: "top",
+    transparentMode: "always",
   },
 }
 
@@ -15,13 +15,13 @@ export const pagesOptions: DocsLayoutProps = {
   tree: source.pageTree,
   links: [
     {
-      text: "LABS.",
-      url: "/labs",
+      text: "/hive",
+      url: "/hive",
       active: "nested-url",
     },
     {
-      text: "HIVE.",
-      url: "/hive",
+      text: "/labs",
+      url: "/labs",
       active: "nested-url",
     },
   ],
