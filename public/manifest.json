@@ -1,0 +1,42 @@
+{
+  "name": "Aelluminate",
+  "short_name": "Aelluminate",
+  "description": "Exploring the future through machine learning, AI, and data science.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#171717",
+  "theme_color": "#171717",
+  "icons": [
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["business"],
+  "related_applications": [
+    {
+      "platform": "web",
+      "url": "https://aelluminate.com",
+      "id": "https://aelluminate.com"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "https://aelluminate.com/og.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "label": "Aelluminate Open Graph Image"
+    }
+  ]
+}
