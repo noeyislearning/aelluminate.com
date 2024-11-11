@@ -11,6 +11,11 @@ export const navLinks: LinkItemType[] = [
     url: "/labs",
     active: "nested-url",
   },
+  {
+    text: "/blog",
+    url: "/blog",
+    active: "nested-url",
+  },
 ]
 
 export const socialLinks = [

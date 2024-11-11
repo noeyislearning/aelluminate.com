@@ -5,7 +5,7 @@ import { loader } from "fumadocs-core/source"
 import { createMDXSource } from "fumadocs-mdx"
 
 import { IconContainer } from "@/components"
-import { docs, meta } from "@/.source"
+import { docs, meta, blog as blogPosts } from "@/.source"
 
 export const source = loader({
   baseUrl: "/",
@@ -16,4 +16,9 @@ export const source = loader({
       })
   },
   source: createMDXSource(docs, meta),
+})
+
+export const blog = loader({
+  baseUrl: "/blog",
+  source: createMDXSource(blogPosts, []),
 })
