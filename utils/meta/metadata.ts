@@ -7,18 +7,18 @@ export const metadata: Metadata = {
     template: "%s | Aelluminate",
   },
   keywords: keywords,
-  manifest: "",
+  manifest: "https://aelluminate.com/manifest.json",
   generator: "Aelluminate",
   applicationName: "Aelluminate",
-  description: "",
+  description: "Exploring the future through machine learning, AI, and data science.",
   openGraph: {
     title: "Aelluminate",
-    description: "",
-    url: "",
+    description: "Exploring the future through machine learning, AI, and data science.",
+    url: "https://aelluminate.com",
     siteName: "Aelluminate",
     images: [
       {
-        url: "",
+        url: "https://aelluminate.com/og.png",
         width: 1920,
         height: 1080,
         alt: "Aelluminate Open Graph Image",
@@ -44,10 +44,10 @@ export const metadata: Metadata = {
     site: "@aelluminate",
     creator: "@aelluminate",
     creatorId: "1658936245899370503",
-    description: "",
+    description: "Exploring the future through machine learning, AI, and data science.",
     images: [
       {
-        url: "",
+        url: "https://aelluminate.com/og.png",
         width: 1920,
         height: 1080,
         alt: "Aelluminate Open Graph Image",
@@ -63,24 +63,46 @@ export const metadata: Metadata = {
     ],
   },
   alternates: {
-    canonical: "",
+    canonical: "https://aelluminate.com",
     languages: {},
   },
   verification: {
     other: {
-      me: [""],
+      me: ["support@aelluminate.com"],
     },
   },
   appLinks: {
     web: {
-      url: "",
+      url: "https://aelluminate.com",
       should_fallback: true,
     },
   },
-  category: "service",
+  category: "business",
 }
 
 export const baseUrl =
   process.env.NODE_ENV === "development"
     ? new URL("http://localhost:3000")
     : new URL("https://aelluminate.com")
+
+export function createMetadata(override: Metadata): Metadata {
+  return {
+    ...override,
+    openGraph: {
+      title: override.title ?? undefined,
+      description: override.description ?? undefined,
+      url: "https://aelluminate.com",
+      images: "/og.png",
+      siteName: "Aelluminate",
+      ...override.openGraph,
+    },
+    twitter: {
+      card: "summary_large_image",
+      creator: "@aelluminate",
+      title: override.title ?? undefined,
+      description: override.description ?? undefined,
+      images: "/og.png",
+      ...override.twitter,
+    },
+  }
+}
