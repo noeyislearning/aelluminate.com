@@ -92,7 +92,7 @@ export function createMetadata(override: Metadata): Metadata {
       title: override.title ?? undefined,
       description: override.description ?? undefined,
       url: "https://aelluminate.com",
-      images: "/og.png",
+      images: "/og-blog.png",
       siteName: "Aelluminate",
       ...override.openGraph,
     },
@@ -101,7 +101,7 @@ export function createMetadata(override: Metadata): Metadata {
       creator: "@aelluminate",
       title: override.title ?? undefined,
       description: override.description ?? undefined,
-      images: "/og.png",
+      images: "/og-blog.png",
       ...override.twitter,
     },
   }
