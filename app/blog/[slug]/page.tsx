@@ -12,7 +12,7 @@ import { ButtonVariants } from "@/components/"
 import { Control } from "./page.client"
 import { HomeLayout } from "fumadocs-ui/layouts/home"
 import { navLinks } from "@/lib/links"
-import { NavLogo } from "@/components"
+import { NavLogo, GoToTopButton } from "@/components"
 
 const svg = `<svg viewBox='0 0 500 500' xmlns='http://www.w3.org/2000/svg'>
   <filter id='noiseFilter'>
@@ -56,7 +56,7 @@ export default async function Page(props: {
             backgroundBlendMode: "difference, difference, normal",
           }}
         >
-          <h1 className="mb-2 font-lora text-3xl font-bold text-white">{page.data.title}</h1>
+          <h1 className="mb-2 font-lora text-5xl font-bold text-white">{page.data.title}</h1>
           <p className="mb-4 text-white/80">{page.data.description}</p>
           <Link href="/blog" className={ButtonVariants({ size: "sm", variant: "secondary" })}>
             See more posts
@@ -92,6 +92,7 @@ export default async function Page(props: {
             <Control url={page.url} />
           </div>
         </article>
+        <GoToTopButton />
       </main>
     </HomeLayout>
   )
