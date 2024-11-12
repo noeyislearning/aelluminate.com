@@ -9,8 +9,7 @@ import { hiveSource } from "@/lib/source"
 import React from "react"
 
 export default async function HiveDocsPage({ params }: { params: { slug?: string[] } }) {
-  const resolvedParams = await params
-  const page = hiveSource.getPage(resolvedParams.slug || [])
+  const page = hiveSource.getPage(params.slug || [])
   if (!page) notFound()
 
   const MDX = page.data.body
@@ -56,8 +55,7 @@ export async function generateMetadata({
 }: {
   params: { slug?: string[] }
 }): Promise<Metadata> {
-  const resolvedParams = await params
-  const page = hiveSource.getPage(resolvedParams.slug || [])
+  const page = hiveSource.getPage(params.slug || [])
   if (!page) notFound()
 
   return {
