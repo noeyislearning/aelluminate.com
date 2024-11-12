@@ -1,0 +1,223 @@
+{
+  "projects": [
+    {
+      "org": "hive",
+      "isFeatured": true,
+      "name": "AI Travel Planner & Booking",
+      "description": "This project is a travel planner and booking system that uses AI to help users plan their trips. The system will provide users with a list of destinations based on their preferences and budget. Users can then select a destination and the system will provide them with a list of activities and accommodations in that destination. Users can then book their trip through the system.",
+      "githubURL": "https://github.com/aelluminate-hive/ai-travel-planner-booking",
+      "contributors": [
+        {
+          "name": "klstxii",
+          "githubURL": "https://github.com/klstxii"
+        },
+        {
+          "name": "scruBB29",
+          "githubURL": "https://github.com/scruBB29"
+        },
+        {
+          "name": "arj3l",
+          "githubURL": "https://github.com/Arj3l"
+        },
+        {
+          "name": "sbx02",
+          "githubURL": "https://github.com/sbx02"
+        },
+        {
+          "name": "jnplmnlsts27",
+          "githubURL": "https://github.com/jnplmnlsts27"
+        },
+        {
+          "name": "Akib3n",
+          "githubURL": "https://github.com/Akib3n"
+        }
+      ]
+    },
+    {
+      "org": "hive",
+      "name": "Job Listing Platform",
+      "isFeatured": true,
+      "description": "Comprehensive web application designed to connect employers with potential employees. This platform allows employers to post job listings, manage applications, and communicate with candidates. Job seekers can create profiles, search for job opportunities, and apply for positions that match their skills and interests.",
+      "githubURL": "https://github.com/aelluminate-hive/job-listing-platform",
+      "contributors": [
+        {
+          "name": "naigggs",
+          "githubURL": "https://github.com/naigggs"
+        },
+        {
+          "name": "Sh10o",
+          "githubURL": "https://github.com/Sh10o"
+        },
+        {
+          "name": "jei3m",
+          "githubURL": "https://github.com/jei3m"
+        },
+        {
+          "name": "jimjam12",
+          "githubURL": "https://github.com/jimjam12"
+        },
+        {
+          "name": "Rejhinald",
+          "githubURL": "https://github.com/Rejhinald"
+        },
+        {
+          "name": "briedvd",
+          "githubURL": "https://github.com/briedvd"
+        }
+      ]
+    },
+    {
+      "org": "hive",
+      "name": "Management System",
+      "isFeatured": true,
+      "description": "A web-based management built using Django, a high-level Python web framework. The system includes functionalities for user authentication, profile management, product management, and order processing. It features a user-friendly interface with forms for user registration, login, profile updates, and CRUD operations for products and orders.",
+      "githubURL": "https://github.com/aelluminate-hive/management-system",
+      "contributors": [
+        {
+          "name": "ELI010703",
+          "githubURL": "https://github.com/ELI010703"
+        },
+        {
+          "name": "MarkCanoy",
+          "githubURL": "https://github.com/MarkCanoy"
+        },
+        {
+          "name": "julesjara",
+          "githubURL": "https://github.com/julesjara"
+        },
+        {
+          "name": "Cocomelon101518",
+          "githubURL": "https://github.com/Cocomelon101518"
+        }
+      ]
+    },
+    {
+      "org": "hive",
+      "name": "Doctor Appointment System",
+      "isFeatured": true,
+      "description": "A web-based application designed to streamline the process of booking and managing doctor appointments. This system allows patients to easily schedule appointments with their preferred doctors, while doctors can manage their schedules, update appointment statuses, and conduct virtual consultations via integrated Google Meet links.",
+      "githubURL": "https://github.com/aelluminate-hive/doctor-appointment-system",
+      "contributors": [
+        {
+          "name": "UnlimitedAvailableUsername",
+          "githubURL": "https://github.com/UnlimitedAvailableUsername"
+        },
+        {
+          "name": "Jerald011003",
+          "githubURL": "https://github.com/Jerald011003"
+        },
+        {
+          "name": "Alaics",
+          "githubURL": "https://github.com/Alaics"
+        },
+        {
+          "name": "chighati",
+          "githubURL": "https://github.com/chighati"
+        },
+        {
+          "name": "BiancaSRP0087",
+          "githubURL": "https://github.com/BiancaSRP0087"
+        },
+        {
+          "name": "Ruririin",
+          "githubURL": "https://github.com/Ruririin"
+        }
+      ]
+    },
+    {
+      "org": "hive",
+      "name": "Task Management",
+      "isFeatured": false,
+      "description": "A robust application designed to streamline task management and collaboration. This application empowers project leaders to effectively oversee tasks, while project workers can actively contribute and track their progress.",
+      "githubURL": "https://github.com/aelluminate-hive/task-management",
+      "contributors": [
+        {
+          "name": "ryokiix",
+          "githubURL": "https://github.com/ryokiix"
+        },
+        {
+          "name": "drixxu",
+          "githubURL": "https://github.com/drixxu"
+        },
+        {
+          "name": "JoseIII",
+          "githubURL": "https://github.com/JoseIII"
+        },
+        {
+          "name": "Cycybagsic",
+          "githubURL": "https://github.com/Cycybagsic"
+        },
+        {
+          "name": "joaaaaax",
+          "githubURL": "https://github.com/joaaaaax"
+        },
+        {
+          "name": "KushyKoooRuririin",
+          "githubURL": "https://github.com/KushyKoooRuririin"
+        }
+      ]
+    },
+    {
+      "org": "hive",
+      "name": "Todo List",
+      "isFeatured": false,
+      "description": "This is a simple yet powerful todo list application designed to help users manage their tasks efficiently. Users can add new tasks, set due dates, assign priorities, edit existing tasks, mark tasks as complete, and delete tasks. The application features a dynamic theme switcher for a personalized user experience. Built with vanilla JavaScript, HTML, and CSS.",
+      "githubURL": "https://github.com/aelluminate-hive/todo-list",
+      "contributors": [
+        {
+          "name": "MrBreak2022",
+          "githubURL": "https://github.com/MrBreak2022"
+        },
+        {
+          "name": "Lawrenceio",
+          "githubURL": "https://github.com/Lawrenceio"
+        },
+        {
+          "name": "mitsucatsu",
+          "githubURL": "https://github.com/mitsucatsu"
+        },
+        {
+          "name": "MJGuevarra17",
+          "githubURL": "https://github.com/MJGuevarra17"
+        },
+        {
+          "name": "IrishD13",
+          "githubURL": "https://github.com/IrishD13"
+        }
+      ]
+    },
+    {
+      "org": "hive",
+      "name": "AI Quiz Generator",
+      "isFeatured": false,
+      "description": "This project is a quiz generator that uses a dataset of questions and answers to generate a quiz. The dataset is a JSON file that contains a list of questions and answers. The quiz generator randomly selects a question from the dataset and presents it to the user. The user can then input their answer, and the quiz generator will check if the answer is correct. The user can continue answering questions until they decide to stop.",
+      "githubURL": "https://github.com/aelluminate-hive/ai-quiz-generator",
+      "contributors": [
+        {
+          "name": "rflrydzn",
+          "githubURL": "https://github.com/rflrydzn"
+        },
+        {
+          "name": "HAU-RafaelES",
+          "githubURL": "https://github.com/HAU-RafaelES"
+        },
+        {
+          "name": "JAINIE12",
+          "githubURL": "https://github.com/JAINIE12"
+        },
+        {
+          "name": "Cless41",
+          "githubURL": "https://github.com/Cless41"
+        },
+        {
+          "name": "russelian819",
+          "githubURL": "https://github.com/russelian819"
+        },
+        {
+          "name": "jagpingol1210",
+          "githubURL": "https://github.com/jagpingol1210"
+        }
+      ]
+    }
+  ]
+}
