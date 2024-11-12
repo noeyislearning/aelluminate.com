@@ -1,0 +1,7 @@
+{
+  "title": "HIVE.",
+  "icon": "GraduationCap",
+  "root": true,
+  "description": "Learn with Hive.",
+  "pages": ["---Welcome---", "index", "---SQL---", "introduction-to-sql"]
+}

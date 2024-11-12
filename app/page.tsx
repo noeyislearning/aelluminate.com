@@ -1,5 +1,4 @@
 import * as React from "react"
-
 import { HomeLayout } from "fumadocs-ui/layouts/home"
 import { navLinks } from "@/lib/links"
 import { NavLogo, HomeHero, Footer } from "@/components"

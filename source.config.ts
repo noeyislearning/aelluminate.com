@@ -1,9 +1,16 @@
 import { defineDocs, defineConfig, defineCollections, frontmatterSchema } from "fumadocs-mdx/config"
 import { fileGenerator, remarkDocGen, remarkInstall, typescriptGenerator } from "fumadocs-docgen"
 import { remarkAdmonition, remarkImage, remarkStructure } from "fumadocs-core/mdx-plugins"
+import { remarkKbdNested } from "remark-kbd-nested"
 import { z } from "zod"
 
-export const { docs, meta } = defineDocs()
+export const { docs: labsDocs, meta: labsMeta } = defineDocs({
+  dir: "content/labs",
+})
+
+export const { docs: hiveDocs, meta: hiveMeta } = defineDocs({
+  dir: "content/hive",
+})
 
 export const blog = defineCollections({
   dir: "content/blog",
@@ -24,6 +31,7 @@ export const blog = defineCollections({
 })
 
 export default defineConfig({
+  lastModifiedTime: "git",
   mdxOptions: {
     rehypeCodeOptions: {
       themes: {
@@ -37,6 +45,7 @@ export default defineConfig({
       [remarkAdmonition],
       [remarkImage],
       [remarkStructure],
+      [remarkKbdNested],
     ],
   },
 })

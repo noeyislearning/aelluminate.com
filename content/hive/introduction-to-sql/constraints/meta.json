@@ -1,0 +1,5 @@
+{
+  "title": "Constraints",
+  "pages": ["not-null", "unique", "primary-key", "foreign-key", "check", "default"],
+  "defaultOpen": true
+}

@@ -1,0 +1,7 @@
+{
+  "title": "LABS.",
+  "icon": "Triangle",
+  "root": true,
+  "description": "Still under construction.",
+  "pages": ["---Welcome---", "index"]
+}

@@ -1,0 +1,5 @@
+{
+  "title": "Statements",
+  "pages": ["create", "select", "insert", "update", "delete", "alter"],
+  "defaultOpen": true
+}

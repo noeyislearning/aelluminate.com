@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 
 import { HomeLayout } from "fumadocs-ui/layouts/home"
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@radix-ui/react-tooltip"
@@ -24,13 +25,15 @@ export default function ShowcasePage(): React.ReactElement {
     <HomeLayout nav={{ title: <NavLogo /> }} links={navLinks} className="h-screen">
       <main className="container max-sm:px-0 md:py-12">
         <div className="absolute inset-0 z-[-1] select-none overflow-hidden opacity-30">
-          {/* <Image
-          alt="spot"
-          src={Spot}
-          sizes="100vw"
-          className="size-full min-w-[800px] max-w-fd-container"
-          priority
-        /> */}
+          <Image
+            alt="spot"
+            src={"/img/spot.png"}
+            sizes="100vw"
+            width={800}
+            height={800}
+            className="size-full min-w-[800px] max-w-fd-container"
+            priority
+          />
         </div>
         <div className="container my-12 text-center">
           <h1 className="mb-4 font-lora text-4xl font-bold md:text-5xl">

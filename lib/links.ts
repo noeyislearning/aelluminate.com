@@ -2,22 +2,22 @@ import { LinkItemType } from "fumadocs-ui/layouts/links"
 
 export const navLinks: LinkItemType[] = [
   {
-    text: "/hive",
+    text: "HIVE.",
     url: "/hive",
     active: "nested-url",
   },
   {
-    text: "/labs",
+    text: "LABS.",
     url: "/labs",
     active: "nested-url",
   },
   {
-    text: "/blog",
+    text: "Blogs",
     url: "/blog",
     active: "nested-url",
   },
   {
-    text: "/showcase",
+    text: "Showcase",
     url: "/showcase",
     active: "nested-url",
   },

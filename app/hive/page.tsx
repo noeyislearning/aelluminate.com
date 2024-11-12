@@ -4,11 +4,11 @@ import { notFound } from "next/navigation"
 import { DocsPage, DocsBody, DocsTitle, DocsDescription } from "fumadocs-ui/page"
 import defaultMdxComponents from "fumadocs-ui/mdx"
 
-import { source } from "@/lib/source"
+import { hiveSource } from "@/lib/source"
 
-export default async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
-  const resolvedParams = await params
-  const page = source.getPage(resolvedParams.slug)
+export default async function HivePage({ params }: { params: { slug?: string[] } }) {
+  const resolvedParams = params
+  const page = hiveSource.getPage(resolvedParams.slug || [])
   if (!page) notFound()
 
   const MDX = page.data.body
@@ -29,16 +29,22 @@ export default async function Page({ params }: { params: Promise<{ slug?: string
 }
 
 export async function generateStaticParams() {
-  return source.generateParams()
+  const params = hiveSource.generateParams().map((params) => ({
+    slug: params.slug || [],
+  }))
+
+  params.push({ slug: [] })
+
+  return params
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug?: string[] }>
+  params: { slug?: string[] }
 }): Promise<Metadata> {
-  const resolvedParams = await params
-  const page = source.getPage(resolvedParams.slug)
+  const resolvedParams = params
+  const page = hiveSource.getPage(resolvedParams.slug || [])
   if (!page) notFound()
 
   return {
