@@ -7,8 +7,8 @@ import defaultMdxComponents from "fumadocs-ui/mdx"
 import { hiveSource } from "@/lib/source"
 import { ExtendedDocsPageProps } from "@/types/docs-page"
 
-export default async function HiveDocsPage({ params }: ExtendedDocsPageProps) {
-  const { slug } = params
+const HiveDocsPage = async ({ params }: ExtendedDocsPageProps) => {
+  const { slug } = await params
 
   const page = hiveSource.getPage(slug || [])
   if (!page) notFound()
@@ -56,8 +56,7 @@ export async function generateMetadata({
 }: {
   params: { slug?: string[] }
 }): Promise<Metadata> {
-  // No need to await params here either
-  const { slug } = params // Directly access params
+  const { slug } = await params
 
   const page = hiveSource.getPage(slug || [])
   if (!page) notFound()
@@ -67,3 +66,5 @@ export async function generateMetadata({
     description: page.data.description,
   }
 }
+
+export default HiveDocsPage

@@ -7,8 +7,8 @@ import defaultMdxComponents from "fumadocs-ui/mdx"
 import { labsSource } from "@/lib/source"
 import { ExtendedDocsPageProps } from "@/types/docs-page"
 
-export default async function LabsDocsPage({ params }: ExtendedDocsPageProps) {
-  const { slug } = params
+const LabsDocsPage = async ({ params }: ExtendedDocsPageProps) => {
+  const { slug } = await params
 
   const page = labsSource.getPage(slug || [])
   if (!page) notFound()
@@ -66,3 +66,5 @@ export async function generateMetadata({
     description: page.data.description,
   }
 }
+
+export default LabsDocsPage
