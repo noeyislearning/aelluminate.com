@@ -8,16 +8,12 @@ import { metadata as SiteMetadata } from "@/utils/meta/metadata"
 export const metadata: Metadata = SiteMetadata
 
 import { Provider } from "./provider"
-import { Footer } from "@/components"
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={[lora.variable, lexend.variable].join(" ")} suppressHydrationWarning>
       <body className="min-h-full font-lexend tracking-tight">
-        <Provider>
-          {children}
-          <Footer />
-        </Provider>
+        <Provider>{children}</Provider>
       </body>
     </html>
   )

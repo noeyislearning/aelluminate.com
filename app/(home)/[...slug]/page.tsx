@@ -1,8 +1,10 @@
-import { source } from "@/lib/source"
-import { DocsPage, DocsBody, DocsTitle, DocsDescription } from "fumadocs-ui/page"
-import { notFound } from "next/navigation"
-import defaultMdxComponents from "fumadocs-ui/mdx"
 import type { Metadata } from "next"
+import { notFound } from "next/navigation"
+
+import { DocsPage, DocsBody, DocsTitle, DocsDescription } from "fumadocs-ui/page"
+import defaultMdxComponents from "fumadocs-ui/mdx"
+
+import { source } from "@/lib/source"
 
 export default async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
   const resolvedParams = await params
@@ -16,7 +18,11 @@ export default async function Page({ params }: { params: Promise<{ slug?: string
       <DocsTitle className="font-lora">{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>
       <DocsBody>
-        <MDX components={{ ...defaultMdxComponents }} />
+        <MDX
+          components={{
+            ...defaultMdxComponents,
+          }}
+        />
       </DocsBody>
     </DocsPage>
   )
