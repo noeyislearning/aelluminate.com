@@ -5,17 +5,30 @@ import { DocsPage, DocsBody, DocsTitle, DocsDescription } from "fumadocs-ui/page
 import defaultMdxComponents from "fumadocs-ui/mdx"
 
 import { labsSource } from "@/lib/source"
+import { ExtendedDocsPageProps } from "@/types/docs-page"
 
-export default async function LabsDocsPage({ params }: { params: { slug?: string[] } }) {
-  const resolvedParams = await params
-  const page = labsSource.getPage(resolvedParams.slug || [])
+export default async function LabsDocsPage({ params }: ExtendedDocsPageProps) {
+  const { slug } = await params
+
+  const page = labsSource.getPage(slug || [])
   if (!page) notFound()
 
   const MDX = page.data.body
 
+  const path = `content/labs/${page.file.path}`
+
   return (
-    <DocsPage toc={page.data.toc} full={page.data.full}>
-      <DocsTitle className="font-lora text-3xl lg:text-4xl">{page.data.title}</DocsTitle>{" "}
+    <DocsPage
+      toc={page.data.toc}
+      full={page.data.full}
+      editOnGithub={{
+        repo: "aelluminate.com",
+        owner: "noeyislearning",
+        sha: "main",
+        path,
+      }}
+    >
+      <DocsTitle className="font-lora text-3xl lg:text-4xl">{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>
       <DocsBody>
         <MDX
@@ -43,8 +56,9 @@ export async function generateMetadata({
 }: {
   params: { slug?: string[] }
 }): Promise<Metadata> {
-  const resolvedParams = await params
-  const page = labsSource.getPage(resolvedParams.slug || [])
+  const { slug } = await params
+
+  const page = labsSource.getPage(slug || [])
   if (!page) notFound()
 
   return {
