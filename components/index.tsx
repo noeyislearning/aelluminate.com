@@ -6,6 +6,6 @@ export { default as ButtonVariants } from "./shared/button/variants"
 export { default as GoToTopButton } from "./shared/button/go-to-top"
 
 /* UI Components */
-export { default as HomeHero } from "./ui/home-hero"
+export { default as HomeHero } from "./ui/hero/home"
 export { default as Footer } from "./ui/footer/main"
 export { default as SidebarFooter } from "./ui/footer/sidebar"
