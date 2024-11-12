@@ -2,7 +2,7 @@ import * as React from "react"
 
 import { HomeLayout } from "fumadocs-ui/layouts/home"
 import { navLinks } from "@/lib/links"
-import { NavLogo, HomeHero } from "@/components"
+import { NavLogo, HomeHero, Footer } from "@/components"
 
 export default function HomePage() {
   return (
@@ -12,6 +12,7 @@ export default function HomePage() {
           <HomeHero />
         </section>
       </main>
+      <Footer />
     </HomeLayout>
   )
 }

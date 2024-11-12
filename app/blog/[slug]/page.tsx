@@ -12,7 +12,7 @@ import { ButtonVariants } from "@/components/"
 import { Control } from "./page.client"
 import { HomeLayout } from "fumadocs-ui/layouts/home"
 import { navLinks } from "@/lib/links"
-import { NavLogo, GoToTopButton } from "@/components"
+import { NavLogo, GoToTopButton, Footer } from "@/components"
 
 const svg = `<svg viewBox='0 0 500 500' xmlns='http://www.w3.org/2000/svg'>
   <filter id='noiseFilter'>
@@ -65,7 +65,11 @@ export default async function Page(props: {
         <article className="container flex flex-col px-0 py-8 lg:flex-row lg:px-4">
           <div className="prose min-w-0 flex-1 p-4">
             <InlineTOC items={page.data.toc} />
-            <page.data.body components={defaultMdxComponents} />
+            <page.data.body
+              components={{
+                defaultMdxComponents,
+              }}
+            />
           </div>
           <div className="flex flex-col gap-4 border-l p-4 text-sm lg:w-[250px]">
             <div>
@@ -84,7 +88,7 @@ export default async function Page(props: {
               </div>
             </div>
             <div>
-              <p className="mb-1 text-sm text-fd-muted-foreground">At</p>
+              <p className="mb-1 text-sm text-fd-muted-foreground">Posted at</p>
               <p className="font-medium">
                 {new Date(page.data.date ?? page.file.name).toDateString()}
               </p>
@@ -94,6 +98,7 @@ export default async function Page(props: {
         </article>
         <GoToTopButton />
       </main>
+      <Footer />
     </HomeLayout>
   )
 }

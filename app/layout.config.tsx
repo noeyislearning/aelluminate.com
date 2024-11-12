@@ -1,11 +1,13 @@
 import { type DocsLayoutProps } from "fumadocs-ui/layouts/docs"
 import { type BaseLayoutProps } from "fumadocs-ui/layouts/shared"
 
+import * as Icon from "lucide-react"
+
 import { source } from "@/lib/source"
 
 export const baseOptions: BaseLayoutProps = {
   nav: {
-    title: "Aelluminate",
+    title: <div className="text-xl">Aelluminate</div>,
     transparentMode: "top",
   },
 }
@@ -15,14 +17,16 @@ export const pagesOptions: DocsLayoutProps = {
   tree: source.pageTree,
   links: [
     {
-      text: "/hive",
-      url: "/hive",
+      text: "/home",
+      url: "/",
       active: "nested-url",
+      icon: <Icon.LayoutGrid />,
     },
     {
-      text: "/labs",
-      url: "/labs",
+      text: "/blog",
+      url: "/blog",
       active: "nested-url",
+      icon: <Icon.LibraryBig />,
     },
   ],
 }

@@ -4,7 +4,7 @@ import { socialLinks } from "@/lib/links"
 
 export default function Footer() {
   return (
-    <footer className="mt-auto flex border-t">
+    <footer className="mt-auto flex">
       <div className="container flex w-full flex-col items-center justify-between gap-2 p-2 md:flex-row lg:flex-row">
         <p className="order-2 text-sm text-stone-800 dark:text-stone-100 md:order-1">
           &copy; {new Date().getFullYear()} Aelluminate. All rights reserved.

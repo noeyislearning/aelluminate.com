@@ -3,7 +3,7 @@ import { blog } from "@/lib/source"
 
 import { HomeLayout } from "fumadocs-ui/layouts/home"
 import { navLinks } from "@/lib/links"
-import { NavLogo } from "@/components"
+import { NavLogo, Footer } from "@/components"
 
 export default function BlogPage(): React.ReactElement {
   const posts = [...blog.getPages()].sort(
@@ -51,7 +51,7 @@ export default function BlogPage(): React.ReactElement {
             <Link
               key={post.url}
               href={post.url}
-              className="flex flex-col bg-fd-card p-4 transition-colors hover:bg-fd-accent hover:text-fd-accent-foreground"
+              className="flex flex-col border border-fd-primary/25 bg-fd-card p-4 transition-colors hover:bg-fd-accent hover:text-fd-accent-foreground"
             >
               <p className="font-lora text-xl font-bold">{post.data.title}</p>
               <p className="line-clamp-4 text-sm text-fd-muted-foreground">
@@ -76,6 +76,7 @@ export default function BlogPage(): React.ReactElement {
           ))}
         </div>
       </main>
+      <Footer />
     </HomeLayout>
   )
 }
