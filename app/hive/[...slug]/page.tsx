@@ -5,17 +5,14 @@ import { DocsPage, DocsBody, DocsTitle, DocsDescription } from "fumadocs-ui/page
 import defaultMdxComponents from "fumadocs-ui/mdx"
 
 import { hiveSource } from "@/lib/source"
-
 import { PageProps } from "@/types/page"
 
 export default async function HivePage({ params }: PageProps) {
-  const resolvedParams = (await params) || { slug: [] }
-
+  const resolvedParams = await params
   const page = hiveSource.getPage(resolvedParams.slug || [])
   if (!page) notFound()
 
   const MDX = page.data.body
-
   const path = `content/hive/${page.file.path}`
 
   return (
@@ -57,7 +54,7 @@ export async function generateMetadata({
 }: {
   params: { slug?: string[] }
 }): Promise<Metadata> {
-  const resolvedParams = (await params) || { slug: [] }
+  const resolvedParams = await params
   const page = hiveSource.getPage(resolvedParams.slug || [])
   if (!page) notFound()
 
