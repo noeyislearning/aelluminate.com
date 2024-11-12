@@ -56,7 +56,9 @@ export default async function Page(props: {
             backgroundBlendMode: "difference, difference, normal",
           }}
         >
-          <h1 className="mb-2 font-lora text-5xl font-bold text-white">{page.data.title}</h1>
+          <h1 className="mb-2 font-lora text-4xl font-bold text-white lg:text-5xl">
+            {page.data.title}
+          </h1>
           <p className="mb-4 text-white/80">{page.data.description}</p>
           <Link href="/blog" className={ButtonVariants({ size: "sm", variant: "secondary" })}>
             See more posts
@@ -64,7 +66,9 @@ export default async function Page(props: {
         </div>
         <article className="container flex flex-col px-0 py-8 lg:flex-row lg:px-4">
           <div className="prose min-w-0 flex-1 p-4">
-            <InlineTOC items={page.data.toc} />
+            <div className="text-sm md:text-base lg:text-base">
+              <InlineTOC items={page.data.toc} />
+            </div>
             <page.data.body
               components={{
                 defaultMdxComponents,
