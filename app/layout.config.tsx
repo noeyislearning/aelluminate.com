@@ -1,32 +1,53 @@
 import { type DocsLayoutProps } from "fumadocs-ui/layouts/docs"
 import { type BaseLayoutProps } from "fumadocs-ui/layouts/shared"
+import { LinkItemType } from "fumadocs-ui/layouts/links"
 
 import * as Icon from "lucide-react"
 
-import { source } from "@/lib/source"
+import { labsSource, hiveSource } from "@/lib/source"
 
 export const baseOptions: BaseLayoutProps = {
   nav: {
     title: <div className="text-xl">Aelluminate</div>,
-    transparentMode: "top",
+    transparentMode: "always",
   },
 }
 
-export const pagesOptions: DocsLayoutProps = {
+const links: LinkItemType[] = [
+  {
+    text: "Hive",
+    url: "/hive",
+    active: "nested-url",
+    icon: <Icon.GraduationCap />,
+  },
+  {
+    text: "Labs",
+    url: "/labs",
+    active: "nested-url",
+    icon: <Icon.TestTubeDiagonal />,
+  },
+  {
+    text: "Blog",
+    url: "/blog",
+    active: "nested-url",
+    icon: <Icon.LibraryBig />,
+  },
+  {
+    text: "Showcase",
+    url: "/showcase",
+    active: "nested-url",
+    icon: <Icon.Award />,
+  },
+]
+
+export const labPagesOptions: DocsLayoutProps = {
   ...baseOptions,
-  tree: source.pageTree,
-  links: [
-    {
-      text: "/home",
-      url: "/",
-      active: "nested-url",
-      icon: <Icon.LayoutGrid />,
-    },
-    {
-      text: "/blog",
-      url: "/blog",
-      active: "nested-url",
-      icon: <Icon.LibraryBig />,
-    },
-  ],
+  tree: labsSource.pageTree,
+  links,
+}
+
+export const hivePagesOptions: DocsLayoutProps = {
+  ...baseOptions,
+  tree: hiveSource.pageTree,
+  links,
 }
