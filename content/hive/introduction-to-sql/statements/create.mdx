@@ -1,0 +1,63 @@
+---
+title: CREATE
+---
+
+This statement tells SQL that we want to create a new table with a specified name and defined columns. Let's illustrate this with a practical example by creating a table named `celebs`.
+
+## Example
+
+Creating the `celebs` table, here’s the SQL command to create our `celebs` table:
+
+```sql
+CREATE TABLE celebs (
+   id INTEGER,
+   name TEXT,
+   age INTEGER
+);
+```
+
+Let’s break down this statement step-by-step:
+
+1. `CREATE TABLE`: This clause indicates that we are creating a new table.
+2. `celebs`: This is the name of our table. It’s where all the celebrity data will be stored.
+3. `(id INTEGER, name TEXT, age INTEGER)`: This list specifies the columns in our table and their data types:
+
+   - **id**: The first column, storing INTEGER values, unique identifiers for each celebrity.
+   - **name**: The second column, storing TEXT values, representing the names of the celebrities.
+   - **age**: The third column, also storing INTEGER values, representing the ages of the celebrities.
+
+## Activity
+
+Now, let's apply what we’ve learned with a hands-on activity. This will help solidify your understanding and get you comfortable with creating tables.
+
+### Let's Confirm the Database is Empty
+
+Before we create our table, we need to ensure the database is empty. Execute the following SQL query:
+
+```sql
+SELECT * FROM celebs;
+```
+
+This query attempts to select all data from the `celebs` table. Since we haven’t created it yet, the result should indicate that no such table exists. This confirms our database is indeed empty and ready for a new table.
+
+### Create the `celebs` Table
+
+With the confirmation that our database is empty, it’s time to create our new `celebs` table. Type the following command:
+
+```sql
+CREATE TABLE celebs (
+   id INTEGER,
+   name TEXT,
+   age INTEGER
+);
+```
+
+Once you’ve entered this command, hit [[Enter]] to execute it. You’ve just created your first table in SQL! Congratulations!
+
+Here's a visual representation of the query results:
+
+| **name** | **type** |
+| -------- | -------- |
+| id       | INTEGER  |
+| name     | TEXT     |
+| age      | INTEGER  |

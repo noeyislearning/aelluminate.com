@@ -1,0 +1,26 @@
+{
+  "title": "Introduction to SQL",
+  "icon": "DatabaseZap",
+  "root": true,
+  "description": "Learn how to use SQL.",
+  "pages": [
+    "index",
+    "introduction",
+    "---Manipulation---",
+    "./relational-database",
+    "./statements",
+    "./constraints",
+    "---Queries---",
+    "as",
+    "distinct",
+    "where",
+    "like",
+    "is-null",
+    "between",
+    "and",
+    "or",
+    "order-by",
+    "limit",
+    "case"
+  ]
+}
