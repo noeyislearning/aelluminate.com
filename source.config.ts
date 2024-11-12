@@ -1,5 +1,6 @@
 import { defineDocs, defineConfig, defineCollections, frontmatterSchema } from "fumadocs-mdx/config"
 import { fileGenerator, remarkDocGen, remarkInstall, typescriptGenerator } from "fumadocs-docgen"
+import { remarkAdmonition, remarkImage, remarkStructure } from "fumadocs-core/mdx-plugins"
 import { z } from "zod"
 
 export const { docs, meta } = defineDocs()
@@ -33,6 +34,9 @@ export default defineConfig({
     remarkPlugins: [
       [remarkInstall, { Tabs: "InstallTabs" }],
       [remarkDocGen, { generators: [typescriptGenerator(), fileGenerator()] }],
+      [remarkAdmonition],
+      [remarkImage],
+      [remarkStructure],
     ],
   },
 })
