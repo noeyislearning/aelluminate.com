@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss"
 import defaultTheme from "tailwindcss/defaultTheme"
+
 import { createPreset, presets } from "fumadocs-ui/tailwind-plugin"
 
 /** @type {import('tailwindcss').Config} */
