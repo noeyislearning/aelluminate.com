@@ -8,7 +8,7 @@ import { labsSource } from "@/lib/source"
 import { ExtendedDocsPageProps } from "@/types/docs-page"
 
 export default async function LabsDocsPage({ params }: ExtendedDocsPageProps) {
-  const { slug } = await params
+  const { slug } = params
 
   const page = labsSource.getPage(slug || [])
   if (!page) notFound()

@@ -8,7 +8,7 @@ import { hiveSource } from "@/lib/source"
 import { ExtendedDocsPageProps } from "@/types/docs-page"
 
 export default async function HiveDocsPage({ params }: ExtendedDocsPageProps) {
-  const { slug } = await params
+  const { slug } = params
 
   const page = hiveSource.getPage(slug || [])
   if (!page) notFound()
@@ -56,7 +56,8 @@ export async function generateMetadata({
 }: {
   params: { slug?: string[] }
 }): Promise<Metadata> {
-  const { slug } = await params
+  // No need to await params here either
+  const { slug } = params // Directly access params
 
   const page = hiveSource.getPage(slug || [])
   if (!page) notFound()
