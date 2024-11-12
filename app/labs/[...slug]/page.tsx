@@ -1,13 +1,14 @@
 import type { Metadata } from "next"
+import { PageProps } from "@/.next/types/app/layout"
 import { notFound } from "next/navigation"
 
 import { DocsPage, DocsBody, DocsTitle, DocsDescription } from "fumadocs-ui/page"
+
 import defaultMdxComponents from "fumadocs-ui/mdx"
 
 import { labsSource } from "@/lib/source"
-import { ExtendedDocsPageProps } from "@/types/docs-page"
 
-const LabsDocsPage = async ({ params }: ExtendedDocsPageProps) => {
+const LabsDocsPage = async ({ params }: PageProps) => {
   const { slug } = await params
 
   const page = labsSource.getPage(slug || [])

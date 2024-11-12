@@ -1,13 +1,14 @@
 import type { Metadata } from "next"
+import { PageProps } from "@/.next/types/app/layout"
 import { notFound } from "next/navigation"
 
 import { DocsPage, DocsBody, DocsTitle, DocsDescription } from "fumadocs-ui/page"
+
 import defaultMdxComponents from "fumadocs-ui/mdx"
 
 import { hiveSource } from "@/lib/source"
-import { ExtendedDocsPageProps } from "@/types/docs-page"
 
-const HiveDocsPage = async ({ params }: ExtendedDocsPageProps) => {
+const HiveDocsPage = async ({ params }: PageProps) => {
   const { slug } = await params
 
   const page = hiveSource.getPage(slug || [])
