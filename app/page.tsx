@@ -6,8 +6,8 @@ import { NavLogo, HomeHero, Footer } from "@/components"
 
 export default function HomePage() {
   return (
-    <HomeLayout nav={{ title: <NavLogo /> }} links={navLinks} className="container h-screen">
-      <main className="relative w-full overflow-hidden px-4 pt-8 lg:px-0">
+    <HomeLayout nav={{ title: <NavLogo /> }} links={navLinks} className="h-screen">
+      <main className="container relative w-full overflow-hidden px-4 pt-8 lg:px-0">
         <section className="mx-auto w-full overflow-x-hidden">
           <HomeHero />
         </section>
