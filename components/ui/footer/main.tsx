@@ -18,9 +18,9 @@ export default function Footer() {
                 return (
                   Icon && (
                     <Link key={link.url} href={link.url} target={"_blank"}>
-                      <span className="flex items-center text-sm hover:text-fd-primary">
+                      <span className="flex items-center gap-1 text-sm hover:text-fd-primary">
                         <Icon className="h-5 w-5" />
-                        <span className="text-sm">{link.text}</span>
+                        <span className="text-xs">{link.text}</span>
                       </span>
                     </Link>
                   )
