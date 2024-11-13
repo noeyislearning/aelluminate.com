@@ -6,8 +6,12 @@ import defaultMdxComponents from "fumadocs-ui/mdx"
 
 import { hiveSource } from "@/lib/source"
 
-export default async function HivePage({ params }: { params: { slug?: string[] } }) {
-  const resolvedParams = params
+interface Params {
+  params: Promise<{ slug?: string[] }>
+}
+
+export default async function HivePage({ params }: Params) {
+  const resolvedParams = await params
   const page = hiveSource.getPage(resolvedParams.slug || [])
   if (!page) notFound()
 
@@ -43,7 +47,7 @@ export async function generateMetadata({
 }: {
   params: { slug?: string[] }
 }): Promise<Metadata> {
-  const resolvedParams = params
+  const resolvedParams = await params
   const page = hiveSource.getPage(resolvedParams.slug || [])
   if (!page) notFound()
 

@@ -6,8 +6,12 @@ import defaultMdxComponents from "fumadocs-ui/mdx"
 
 import { labsSource } from "@/lib/source"
 
-export default async function LabsPage({ params }: { params: { slug?: string[] } }) {
-  const resolvedParams = params
+interface Params {
+  params: Promise<{ slug?: string[] }>
+}
+
+export default async function LabsPage({ params }: Params) {
+  const resolvedParams = await params
   const page = labsSource.getPage(resolvedParams.slug || [])
   if (!page) notFound()
 
@@ -33,7 +37,6 @@ export async function generateStaticParams() {
     slug: params.slug || [],
   }))
 
-  // Add the base /labs URL
   params.push({ slug: [] })
 
   return params
@@ -44,7 +47,7 @@ export async function generateMetadata({
 }: {
   params: { slug?: string[] }
 }): Promise<Metadata> {
-  const resolvedParams = params
+  const resolvedParams = await params
   const page = labsSource.getPage(resolvedParams.slug || [])
   if (!page) notFound()
 
