@@ -5,9 +5,3 @@
 :root {
   --primary: 10 85% 59%;
 }
-
-header {
-  border: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-}
