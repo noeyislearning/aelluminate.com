@@ -7,12 +7,11 @@ import defaultMdxComponents from "fumadocs-ui/mdx"
 import { labsSource } from "@/lib/source"
 
 interface Params {
-  params: Promise<{ slug?: string[] }>
+  params: { slug?: string[] }
 }
 
 export default async function LabsPage({ params }: Params) {
-  const resolvedParams = await params
-  const page = labsSource.getPage(resolvedParams.slug || [])
+  const page = labsSource.getPage(params.slug || [])
   if (!page) notFound()
 
   const MDX = page.data.body
@@ -47,8 +46,7 @@ export async function generateMetadata({
 }: {
   params: { slug?: string[] }
 }): Promise<Metadata> {
-  const resolvedParams = await params
-  const page = labsSource.getPage(resolvedParams.slug || [])
+  const page = labsSource.getPage(params.slug || [])
   if (!page) notFound()
 
   return {
