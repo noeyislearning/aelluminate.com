@@ -8,12 +8,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: url("/"),
-      changeFrequency: "monthly",
+      changeFrequency: "weekly",
       priority: 1,
     },
     {
-      url: url("/docs"),
-      changeFrequency: "monthly",
+      url: url("/blog"),
+      changeFrequency: "weekly",
+      priority: 1,
+    },
+    {
+      url: url("/hive"),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: url("/labs"),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: url("/shwocase"),
+      changeFrequency: "weekly",
       priority: 0.8,
     },
     ...source.getPages().map<MetadataRoute.Sitemap[number]>((page) => ({
