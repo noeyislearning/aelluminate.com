@@ -5,7 +5,7 @@ import { labPagesOptions } from "../layout.config"
 
 import { SidebarFooter } from "@/components/"
 
-export default function HomeLayout({ children }: { children: ReactNode }) {
+export default function LabsLayout({ children }: { children: ReactNode }) {
   return (
     <DocsLayout
       {...labPagesOptions}

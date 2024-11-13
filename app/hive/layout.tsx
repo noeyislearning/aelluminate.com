@@ -5,7 +5,7 @@ import { hivePagesOptions } from "../layout.config"
 
 import { SidebarFooter } from "@/components/"
 
-export default function HomeLayout({ children }: { children: ReactNode }) {
+export default function HiveLayout({ children }: { children: ReactNode }) {
   return (
     <DocsLayout
       {...hivePagesOptions}

@@ -25,12 +25,12 @@ export const navLinks: LinkItemType[] = [
 
 export const socialLinks = [
   {
-    text: "/hive",
+    text: "HIVE.",
     url: "https://github.com/aelluminate-hive",
     icon: "RiGithubLine",
   },
   {
-    text: "/labs",
+    text: "LABS.",
     url: "https://github.com/aelluminate-labs",
     icon: "RiGithubLine",
   },

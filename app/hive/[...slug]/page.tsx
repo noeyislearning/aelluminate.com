@@ -6,14 +6,16 @@ import defaultMdxComponents from "fumadocs-ui/mdx"
 
 import { hiveSource } from "@/lib/source"
 
-import React from "react"
+interface Params {
+  params: Promise<{ slug?: string[] }>
+}
 
-export default async function HiveDocsPage({ params }: { params: { slug?: string[] } }) {
-  const page = hiveSource.getPage(params.slug || [])
+export default async function HivePage({ params }: Params) {
+  const resolvedParams = await params
+  const page = hiveSource.getPage(resolvedParams.slug || [])
   if (!page) notFound()
 
   const MDX = page.data.body
-
   const path = `content/hive/${page.file.path}`
 
   return (
@@ -44,18 +46,13 @@ export async function generateStaticParams() {
   const params = hiveSource.generateParams().map((params) => ({
     slug: params.slug || [],
   }))
-
   params.push({ slug: [] })
-
   return params
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug?: string[] }
-}): Promise<Metadata> {
-  const page = hiveSource.getPage(params.slug || [])
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const resolvedParams = await params
+  const page = hiveSource.getPage(resolvedParams.slug || [])
   if (!page) notFound()
 
   return {
