@@ -43,17 +43,11 @@ export async function generateStaticParams() {
   const params = hiveSource.generateParams().map((params) => ({
     slug: params.slug || [],
   }))
-
   params.push({ slug: [] })
-
   return params
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug?: string[] }
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params
   const page = hiveSource.getPage(resolvedParams.slug || [])
   if (!page) notFound()
