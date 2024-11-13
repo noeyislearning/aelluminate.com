@@ -6,12 +6,13 @@ import defaultMdxComponents from "fumadocs-ui/mdx"
 import { labsSource } from "@/lib/source"
 
 interface PageProps {
-  params: { slug?: string[] }
-  searchParams?: { [key: string]: string | string[] | undefined }
+  params: Promise<{ slug?: string[] }>
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
 export default async function LabsPage({ params }: PageProps) {
-  const page = labsSource.getPage(params.slug || [])
+  const resolvedParams = await params
+  const page = labsSource.getPage(resolvedParams.slug || [])
   if (!page) notFound()
   const MDX = page.data.body
   return (
