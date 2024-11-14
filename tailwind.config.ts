@@ -24,6 +24,7 @@ const config: Config = {
         "spin-around": "spin-around calc(var(--speed) * 2) infinite linear",
         slide: "slide var(--speed) ease-in-out infinite alternate",
         meteor: "meteor 5s linear infinite",
+        shake: "shake 0.5s infinite",
       },
       keyframes: {
         "spin-around": {
@@ -53,6 +54,12 @@ const config: Config = {
             opacity: "0",
           },
         },
+        shake: {
+          "0%, 100%": { transform: "rotate(0deg)" },
+          "25%": { transform: "rotate(10deg)" },
+          "50%": { transform: "rotate(-5deg)" },
+          "75%": { transform: "rotate(10deg)" },
+        },
       },
     },
   },
@@ -60,10 +67,14 @@ const config: Config = {
     createPreset({
       addGlobalColors: true,
       preset: {
-        ...presets.default,
+        light: {
+          ...presets.default.light,
+          primary: "0 3% 20%",
+        },
         dark: {
           ...presets.default.dark,
-          background: "0 0% 2%",
+          primary: "58 100% 53%",
+          background: "0 0% 0%",
           foreground: "0 0% 98%",
           popover: "0 0% 4%",
           card: "0 0% 4%",
