@@ -73,7 +73,7 @@ const config: Config = {
         },
         dark: {
           ...presets.default.dark,
-          primary: "58 100% 53%",
+          primary: "50 75% 70%",
           background: "0 0% 0%",
           foreground: "0 0% 98%",
           popover: "0 0% 4%",
