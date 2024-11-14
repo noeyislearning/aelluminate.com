@@ -37,6 +37,11 @@ export default async function HivePage({ params }: Params) {
       full={page.data.full}
       editOnGithub={edit}
       lastUpdate={time ? new Date(time) : new Date()}
+      tableOfContent={{
+        single: false,
+        style: "clerk",
+      }}
+      tableOfContentPopover={{ enabled: true }}
     >
       <DocsTitle className="font-lora text-3xl lg:text-4xl">{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>

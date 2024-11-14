@@ -56,11 +56,11 @@ export default function ShowcasePage(): React.ReactElement {
               key={project.githubURL}
               rel="noreferrer noopener"
               target="_blank"
-              className="flex cursor-pointer flex-col border border-fd-primary/25 bg-fd-card p-4 transition-colors hover:bg-fd-accent hover:text-fd-accent-foreground"
+              className="group flex cursor-pointer flex-col border border-fd-primary/25 bg-fd-card p-4 transition-colors hover:bg-fd-accent hover:text-fd-accent-foreground"
             >
               <div className="mb-2 flex flex-row items-center justify-between gap-2 text-fd-primary">
                 <span className="text-sm">/{project.org}</span>
-                {project.isFeatured && <Icon.Award className="h-5 w-5" />}
+                {project.isFeatured && <Icon.Award className="group-hover:animate-shake h-6 w-6" />}
               </div>
               <h2 className="font-lora text-xl font-bold">{project.name}</h2>
               <p className="line-clamp-4 text-sm text-fd-muted-foreground">{project.description}</p>
@@ -71,7 +71,7 @@ export default function ShowcasePage(): React.ReactElement {
                     <TooltipProvider key={index}>
                       <Tooltip delayDuration={50}>
                         <TooltipTrigger asChild>
-                          <div className="relative inline-flex h-5 w-5 items-center justify-center overflow-hidden bg-fd-primary">
+                          <div className="relative inline-flex h-5 w-5 items-center justify-center overflow-hidden bg-fd-primary-foreground">
                             <span className="font-medium">
                               {contributor.name.charAt(0).toUpperCase()}
                             </span>
@@ -91,7 +91,7 @@ export default function ShowcasePage(): React.ReactElement {
                     <TooltipProvider>
                       <Tooltip delayDuration={50}>
                         <TooltipTrigger asChild>
-                          <div className="relative inline-flex h-5 w-5 cursor-pointer items-center justify-center overflow-hidden bg-fd-primary">
+                          <div className="relative inline-flex h-5 w-5 cursor-pointer items-center justify-center overflow-hidden bg-fd-primary-foreground">
                             <span className="font-medium">+{project.contributors.length - 3}</span>
                           </div>
                         </TooltipTrigger>

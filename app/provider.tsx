@@ -10,6 +10,7 @@ export function Provider({ children }: { children: ReactNode }): React.ReactElem
     <RootProvider
       theme={{
         enabled: true,
+        defaultTheme: "dark",
       }}
     >
       <TooltipProvider>
