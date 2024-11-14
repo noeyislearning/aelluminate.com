@@ -12,7 +12,7 @@ export const navLinks: LinkItemType[] = [
     active: "nested-url",
   },
   {
-    text: "Blogs",
+    text: "Blog",
     url: "/blog",
     active: "nested-url",
   },
