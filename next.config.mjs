@@ -8,7 +8,11 @@ const config = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "img.shields.io",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "i.imgur.com",
       },
     ],
   },

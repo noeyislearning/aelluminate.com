@@ -1,8 +1,8 @@
 import type { ReactNode } from "react"
 
 import { DocsLayout } from "fumadocs-ui/layouts/docs"
-import { hivePagesOptions } from "../layout.config"
 
+import { hivePagesOptions } from "../layout.config"
 import { SidebarFooter } from "@/components/"
 
 export default function HiveLayout({ children }: { children: ReactNode }) {

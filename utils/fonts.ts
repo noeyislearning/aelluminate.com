@@ -1,4 +1,4 @@
-import { Lora, Lexend_Deca, Inter } from "next/font/google"
+import { Lora, Lexend_Deca, JetBrains_Mono } from "next/font/google"
 
 export const lora = Lora({
   subsets: ["latin"],
@@ -10,7 +10,7 @@ export const lexend = Lexend_Deca({
   variable: "--font-lexend",
 })
 
-export const inter = Inter({
+export const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-jetbrains",
 })

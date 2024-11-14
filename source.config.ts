@@ -2,6 +2,9 @@ import { defineDocs, defineConfig, defineCollections, frontmatterSchema } from "
 import { fileGenerator, remarkDocGen, remarkInstall, typescriptGenerator } from "fumadocs-docgen"
 import { remarkAdmonition, remarkImage, remarkStructure } from "fumadocs-core/mdx-plugins"
 import { remarkKbdNested } from "remark-kbd-nested"
+import rehypeExternalLinks from "rehype-external-links"
+import remarkMath from "remark-math"
+import rehypeKatex from "rehype-katex"
 import { z } from "zod"
 
 export const { docs: labsDocs, meta: labsMeta } = defineDocs({
@@ -15,15 +18,19 @@ export const { docs: hiveDocs, meta: hiveMeta } = defineDocs({
 export const blog = defineCollections({
   dir: "content/blog",
   schema: frontmatterSchema.extend({
-    author: z.string(),
-    authorLinks: z
-      .array(
-        z.object({
-          platform: z.string(),
-          url: z.string().url(),
-        }),
-      )
-      .optional(),
+    authors: z.array(
+      z.object({
+        name: z.string(),
+        links: z
+          .array(
+            z.object({
+              platform: z.string(),
+              url: z.string().url(),
+            }),
+          )
+          .optional(),
+      }),
+    ),
     date: z.string().date().or(z.date()).optional(),
     thumbnail: z.string().url().optional(),
   }),
@@ -46,6 +53,11 @@ export default defineConfig({
       [remarkImage],
       [remarkStructure],
       [remarkKbdNested],
+      [remarkMath],
+    ],
+    rehypePlugins: [
+      [rehypeExternalLinks, { target: "_blank", rel: ["noopener", "noreferrer"] }],
+      [rehypeKatex],
     ],
   },
 })

@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
+import { getGithubLastEdit } from "fumadocs-core/server"
 import { DocsPage, DocsBody, DocsTitle, DocsDescription } from "fumadocs-ui/page"
 import defaultMdxComponents from "fumadocs-ui/mdx"
 
@@ -18,16 +19,24 @@ export default async function HivePage({ params }: Params) {
   const MDX = page.data.body
   const path = `content/hive/${page.file.path}`
 
+  const edit = {
+    repo: "aelluminate.com",
+    owner: "noeyislearning",
+    sha: "main",
+    path,
+  }
+  const time = await getGithubLastEdit({
+    repo: "aelluminate.com",
+    owner: "noeyislearning",
+    path,
+  })
+
   return (
     <DocsPage
       toc={page.data.toc}
       full={page.data.full}
-      editOnGithub={{
-        repo: "aelluminate.com",
-        owner: "noeyislearning",
-        sha: "main",
-        path,
-      }}
+      editOnGithub={edit}
+      lastUpdate={time ? new Date(time) : new Date()}
     >
       <DocsTitle className="font-lora text-3xl lg:text-4xl">{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>

@@ -18,7 +18,7 @@ const config: Config = {
       fontFamily: {
         lexend: ["var(--font-lexend)", ...defaultTheme.fontFamily.sans],
         lora: ["var(--font-lora)", ...defaultTheme.fontFamily.serif],
-        inter: ["var(--font-inter)", ...defaultTheme.fontFamily.sans],
+        jetbrains: ["var(--font-jetbrains)", ...defaultTheme.fontFamily.mono],
       },
       animation: {
         "spin-around": "spin-around calc(var(--speed) * 2) infinite linear",
