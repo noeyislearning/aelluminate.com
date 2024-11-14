@@ -27,7 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: url("/shwocase"),
+      url: url("/showcase"),
       changeFrequency: "weekly",
       priority: 0.8,
     },

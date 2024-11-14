@@ -4,25 +4,14 @@ import { blog } from "@/lib/source"
 import { HomeLayout } from "fumadocs-ui/layouts/home"
 import { navLinks } from "@/lib/links"
 import { NavLogo, Footer } from "@/components"
+import { svg } from "@/lib/backgrounds"
 
-export default function BlogPage(): React.ReactElement {
+export default function BlogsPage(): React.ReactElement {
   const posts = [...blog.getPages()].sort(
     (a, b) =>
       new Date(b.data.date ?? b.file.name).getTime() -
       new Date(a.data.date ?? a.file.name).getTime(),
   )
-
-  const svg = `<svg viewBox='0 0 500 500' xmlns='http://www.w3.org/2000/svg'>
-  <filter id='noiseFilter'>
-    <feTurbulence 
-      type='fractalNoise' 
-      baseFrequency='0.95' 
-      numOctaves='3'
-      stitchTiles='stitch'/>
-  </filter>
-  
-  <rect width='100%' height='100%' filter='url(#noiseFilter)'/>
-  </svg>`
 
   return (
     <HomeLayout nav={{ title: <NavLogo /> }} links={navLinks} className="h-screen">
@@ -60,7 +49,7 @@ export default function BlogPage(): React.ReactElement {
 
               <div className="mt-auto flex w-full flex-col items-start justify-between pt-4">
                 <div className="text-xs">
-                  by <span>{post.data.author}</span>
+                  by <span>{post.data.authors?.map((author) => author.name).join(", ")}</span>
                 </div>
                 <div className="flex w-full flex-row items-center justify-between">
                   <p className="text-xs text-fd-muted-foreground">
