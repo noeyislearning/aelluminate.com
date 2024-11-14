@@ -3,5 +3,10 @@
   "icon": "Triangle",
   "root": true,
   "description": "Still under construction.",
-  "pages": ["---Welcome---", "index"]
+  "pages": [
+    "---Welcome---",
+    "index",
+    "---Project Structures---",
+    "./project-structures/machine-learning"
+  ]
 }
