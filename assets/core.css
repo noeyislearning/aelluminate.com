@@ -3,7 +3,3 @@
 @tailwind utilities;
 
 @import "katex/dist/katex.min.css";
-
-:root {
-  --primary: 10 85% 59%;
-}

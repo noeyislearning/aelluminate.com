@@ -28,6 +28,11 @@ export default async function LabsPage({ params }: Params) {
         sha: "main",
         path,
       }}
+      tableOfContent={{
+        single: false,
+        style: "clerk",
+      }}
+      tableOfContentPopover={{ enabled: true }}
     >
       <DocsTitle className="font-lora text-3xl lg:text-4xl">{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>
