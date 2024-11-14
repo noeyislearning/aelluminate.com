@@ -55,11 +55,8 @@ export default async function BlogPage(props: {
             See more posts
           </Link>
         </div>
-        <article className="container flex flex-col px-0 py-8 lg:flex-row lg:px-4">
+        <article className="container flex flex-col px-0 py-8 lg:flex-row lg:px-48">
           <div className="prose min-w-0 flex-1 p-4">
-            <div className="text-sm md:text-base lg:text-base">
-              <InlineTOC items={page.data.toc} />
-            </div>
             <page.data.body
               components={{
                 defaultMdxComponents,
@@ -110,6 +107,9 @@ export default async function BlogPage(props: {
               </p>
             </div>
             <Control url={page.url} />
+            <div className="sticky top-16 text-sm md:text-base lg:text-base">
+              <InlineTOC items={page.data.toc} defaultOpen={true} />
+            </div>
           </div>
         </article>
         <GoToTopButton />
