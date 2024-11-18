@@ -3,7 +3,7 @@ import type { ReactNode } from "react"
 import { DocsLayout } from "fumadocs-ui/layouts/docs"
 import { labPagesOptions } from "../layout.config"
 
-import { SidebarFooter } from "@/components/"
+import { SidebarFooter, DocsBanner } from "@/components/"
 
 export default function LabsLayout({ children }: { children: ReactNode }) {
   return (
@@ -11,7 +11,7 @@ export default function LabsLayout({ children }: { children: ReactNode }) {
       {...labPagesOptions}
       sidebar={{
         prefetch: true,
-        banner: <div className="text-xs">Promoting knowledge sharing.</div>,
+        banner: <DocsBanner />,
         footer: <SidebarFooter />,
         collapsible: true,
         tabs: false,

@@ -1,13 +1,13 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import Link from "next/link"
-
 import * as RemixIcons from "@remixicon/react"
+
+import defaultMdxComponents from "fumadocs-ui/mdx"
 import { InlineTOC } from "fumadocs-ui/components/inline-toc"
 import { Pre, CodeBlock } from "fumadocs-ui/components/codeblock"
 import { Callout } from "fumadocs-ui/components/callout"
 import { ImageZoom } from "fumadocs-ui/components/image-zoom"
-import defaultMdxComponents from "fumadocs-ui/mdx"
 import { HomeLayout } from "fumadocs-ui/layouts/home"
 
 import { blog } from "@/lib/source"

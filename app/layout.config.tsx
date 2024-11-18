@@ -8,7 +8,7 @@ import { labsSource, hiveSource } from "@/lib/source"
 
 export const baseOptions: BaseLayoutProps = {
   nav: {
-    title: <div className="text-xl">Aelluminate</div>,
+    title: <div className="font-lora text-xl font-bold">Aelluminate.</div>,
     transparentMode: "top",
   },
 }
