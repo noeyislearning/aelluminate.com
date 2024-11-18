@@ -5,6 +5,7 @@ export { default as NavLogo } from "./shared/nav/logo"
 export { default as ButtonVariants } from "./shared/button/variants"
 export { default as GoToTopButton } from "./shared/button/go-to-top"
 export { default as CustomCallout } from "./shared/customs/callout"
+export { default as DocsBanner } from "./shared/banner/docs-banner"
 
 /* UI Components */
 export { default as HomeHero } from "./ui/hero/home"
