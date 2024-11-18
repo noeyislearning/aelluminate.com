@@ -31,6 +31,11 @@ export const blog = defineCollections({
           .optional(),
       }),
     ),
+    tags: z.array(
+      z.object({
+        name: z.string(),
+      }),
+    ).optional(),
     date: z.string().date().or(z.date()).optional(),
     thumbnail: z.string().url().optional(),
   }),
