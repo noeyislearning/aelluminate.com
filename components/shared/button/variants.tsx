@@ -6,7 +6,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-fd-background hover:bg-fd-accent hover:text-fd-accent-foreground border border-fd-primary",
+          "bg-fd-background hover:bg-fd-accent hover:text-fd-accent-foreground border border-fd-primary/25",
         outline:
           "border border-fd-primary bg-gradient-to-t from-fd-primary/10 shadow-inner shadow-fd-primary/10 hover:bg-fd-accent hover:text-fd-accent-foreground",
         secondary: "border bg-fd-secondary text-fd-secondary-foreground hover:bg-fd-accent",

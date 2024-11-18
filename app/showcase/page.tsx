@@ -49,7 +49,7 @@ export default function ShowcasePage(): React.ReactElement {
             <span className="text-xs">Will be available soon.</span>
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-2 pt-4 md:grid-cols-3 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-2 px-2 pt-4 md:grid-cols-3 md:px-0 lg:grid-cols-4 lg:px-0">
           {projects.map((project) => (
             <Link
               href={project.githubURL}
@@ -60,7 +60,7 @@ export default function ShowcasePage(): React.ReactElement {
             >
               <div className="mb-2 flex flex-row items-center justify-between gap-2 text-fd-primary">
                 <span className="text-sm">/{project.org}</span>
-                {project.isFeatured && <Icon.Award className="group-hover:animate-shake h-6 w-6" />}
+                {project.isFeatured && <Icon.Award className="h-6 w-6 group-hover:animate-shake" />}
               </div>
               <h2 className="font-lora text-xl font-bold">{project.name}</h2>
               <p className="line-clamp-4 text-sm text-fd-muted-foreground">{project.description}</p>
