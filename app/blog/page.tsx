@@ -5,7 +5,6 @@ import { navLinks } from "@/lib/links"
 import { NavLogo, Footer } from "@/components"
 import { svg } from "@/lib/backgrounds"
 import { blog } from "@/lib/source"
-import { map } from "zod"
 
 export default function BlogsPage(): React.ReactElement {
   const posts = [...blog.getPages()].sort(
