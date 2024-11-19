@@ -1,0 +1,338 @@
+---
+title: "Unlocking the Power of Scikit-learn: Hidden Gems for Machine Learning Mastery"
+description: Boost your machine learning skills with these seven underutilized Scikit-learn functionalities, and learn how to implement them for improved efficiency and model performance.
+authors:
+  - name: Francis Ignacio
+    links:
+      - platform: "linkedin"
+        url: "https://www.linkedin.com/in/noeyislearning/"
+date: 2024-11-19
+thumbnail: "https://plus.unsplash.com/premium_photo-1668941954953-0475b70cf897"
+---
+
+Scikit-learn stands as a pillar in the world of Python machine learning, providing a rich toolkit for data scientists of all levels. While the basic functionalities are widely known, Scikit-learn harbors a collection of "hidden gems" – powerful features that often go unnoticed but have the potential to dramatically enhance your machine learning workflows and boost your model's performance.
+
+## 1. Aligning Predictions with Reality—The Power of Probability Calibration
+
+Many classification models in machine learning provide probability estimates for each class. However, these estimates may not always accurately represent the true likelihood of the predicted outcome. For example, a model might confidently predict "fraud" with a 95% probability, but in reality, only 70% of such predictions turn out to be correct. This discrepancy can be problematic in applications where the confidence level of the prediction is critical, such as medical diagnosis or credit scoring.
+
+Scikit-learn offers probability calibration techniques – **sigmoid calibration** and **isotonic regression** – to rectify this issue. These techniques work by adjusting the predicted probabilities to better reflect the actual likelihoods, ensuring that the confidence levels align with real-world outcomes.
+
+```python title="probability_calibration.py"
+# Import necessary libraries
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.datasets import make_classification
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.calibration import CalibratedClassifierCV, calibration_curve
+from sklearn.model_selection import train_test_split
+
+# Generate a synthetic dataset
+X, y = make_classification(n_samples=2000, n_features=20, n_informative=2, n_redundant=10, random_state=42)
+
+# Split the dataset into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Train a Gradient Boosting Classifier
+gbc = GradientBoostingClassifier(random_state=42)
+gbc.fit(X_train, y_train)
+
+# Calibrate the classifier using sigmoid calibration
+calibrated_gbc_sigmoid = CalibratedClassifierCV(gbc, method='sigmoid', cv='prefit')
+calibrated_gbc_sigmoid.fit(X_train, y_train)
+
+# Calibrate the classifier using isotonic regression
+calibrated_gbc_isotonic = CalibratedClassifierCV(gbc, method='isotonic', cv='prefit')
+calibrated_gbc_isotonic.fit(X_train, y_train)
+
+# Get the predicted probabilities
+prob_pos_gbc = gbc.predict_proba(X_test)[:, 1]
+prob_pos_sigmoid = calibrated_gbc_sigmoid.predict_proba(X_test)[:, 1]
+prob_pos_isotonic = calibrated_gbc_isotonic.predict_proba(X_test)[:, 1]
+
+# Compute the calibration curve
+fraction_of_positives_gbc, mean_predicted_value_gbc = calibration_curve(y_test, prob_pos_gbc, n_bins=10)
+fraction_of_positives_sigmoid, mean_predicted_value_sigmoid = calibration_curve(y_test, prob_pos_sigmoid, n_bins=10)
+fraction_of_positives_isotonic, mean_predicted_value_isotonic = calibration_curve(y_test, prob_pos_isotonic, n_bins=10)
+
+# Plot the calibration curves
+plt.figure(figsize=(10, 7))
+plt.plot(mean_predicted_value_gbc, fraction_of_positives_gbc, "s-", label="Gradient Boosting")
+plt.plot(mean_predicted_value_sigmoid, fraction_of_positives_sigmoid, "s-", label="Sigmoid Calibration")
+plt.plot(mean_predicted_value_isotonic, fraction_of_positives_isotonic, "s-", label="Isotonic Calibration")
+plt.plot([0, 1], [0, 1], "k:", label="Perfectly calibrated")
+
+plt.xlabel("Mean predicted value")
+plt.ylabel("Fraction of positives")
+plt.title("Calibration curves (reliability diagrams)")
+plt.legend()
+plt.show()
+```
+
+## 2. Mastering Feature Engineering—Simplifying Workflows with Feature Union
+
+Feature engineering, a crucial step in machine learning, often involves applying multiple transformations and extractions to the same dataset. Juggling these operations can lead to complex and less-than-ideal code. Scikit-learn's **FeatureUnion** class comes to the rescue, providing an elegant way to combine multiple transformer objects into a single transformer.
+
+This enables parallel processing of transformations, making your code cleaner, more efficient, and easier to manage. Imagine seamlessly integrating dimensionality reduction using PCA with feature selection via SelectKBest – FeatureUnion makes it possible.
+
+```python title="feature_union.py"
+from sklearn.pipeline import FeatureUnion, Pipeline
+from sklearn.decomposition import PCA
+from sklearn.feature_selection import SelectKBest, f_classif
+from sklearn.preprocessing import StandardScaler
+from sklearn.datasets import make_classification
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+# Generate a synthetic dataset
+X, y = make_classification(n_samples=1000, n_features=20, n_informative=10, n_redundant=10, random_state=42)
+
+# Split the dataset into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Define the feature union
+feature_union = FeatureUnion([
+    ('pca', PCA(n_components=5)),
+    ('select_best', SelectKBest(score_func=f_classif, k=5))
+])
+
+# Create a pipeline that combines feature scaling, feature union, and a classifier
+pipeline = Pipeline([
+    ('scaler', StandardScaler()),
+    ('features', feature_union),
+    ('classifier', RandomForestClassifier(random_state=42))
+])
+
+# Train the pipeline
+pipeline.fit(X_train, y_train)
+
+# Make predictions
+y_pred = pipeline.predict(X_test)
+
+# Evaluate the model
+accuracy = accuracy_score(y_test, y_pred)
+print(accuracy)
+```
+
+## 3. Taming High-Dimensional Data—Dimensionality Reduction with Feature Agglomeration
+
+Datasets with many features, especially those with high correlation, can pose challenges for machine learning models. **Feature agglomeration** tackles this issue by employing hierarchical clustering to merge similar features, effectively reducing the dataset's dimensionality while preserving crucial information.
+
+Scikit-learn's implementation offers remarkable flexibility, allowing you to tailor the process to your specific needs. You can experiment with different distance metrics, linkage criteria, and even define custom functions to aggregate features, helping you find the optimal feature set for your model.
+
+```python title="feature_agglomeration.py"
+from sklearn.pipeline import FeatureUnion, Pipeline
+from sklearn.cluster import FeatureAgglomeration
+from sklearn.preprocessing import StandardScaler
+from sklearn.datasets import make_classification
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+# Generate a synthetic dataset
+X, y = make_classification(n_samples=1000, n_features=20, n_informative=10, n_redundant=10, random_state=42)
+
+# Split the dataset into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Define the feature agglomeration
+feature_agglomeration = FeatureAgglomeration(n_clusters=10)
+
+# Create a pipeline that combines feature scaling, feature agglomeration, and a classifier
+pipeline = Pipeline([
+    ('scaler', StandardScaler()),
+    ('feature_agglomeration', feature_agglomeration),
+    ('classifier', RandomForestClassifier(random_state=42))
+])
+
+# Train the pipeline
+pipeline.fit(X_train, y_train)
+
+# Make predictions
+y_pred = pipeline.predict(X_test)
+
+# Evaluate the model
+accuracy = accuracy_score(y_test, y_pred)
+print(accuracy)
+```
+
+## 4.  Efficient Re-Training—Leveraging the Power of Warm Start
+Re-training machine learning models from scratch can be computationally expensive, especially when dealing with large datasets or online learning scenarios. Scikit-learn's **warm start** parameter comes in handy, allowing you to reuse the solution from the previous training as a starting point for subsequent iterations.
+
+This can significantly reduce training time and computational resources. For instance, you can seamlessly add more trees to a GradientBoostingClassifier or train an SGDClassifier incrementally on data batches without starting from zero each time
+
+```python title="warm_start.py"
+from sklearn.pipeline import FeatureUnion, Pipeline
+from sklearn.cluster import FeatureAgglomeration
+from sklearn.preprocessing import StandardScaler
+from sklearn.datasets import make_classification
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+# Generate a synthetic dataset
+X, y = make_classification(n_samples=1000, n_features=20, n_informative=10, n_redundant=10, random_state=42)
+
+# Split the dataset into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Define the feature agglomeration
+feature_agglomeration = FeatureAgglomeration(n_clusters=10)
+
+# Create a pipeline that combines feature scaling, feature agglomeration, and a classifier
+pipeline = Pipeline([
+    ('scaler', StandardScaler()),
+    ('feature_agglomeration', feature_agglomeration),
+    ('classifier', RandomForestClassifier(random_state=42, warm_start=True))
+])
+
+# Train the pipeline
+pipeline.fit(X_train, y_train)
+
+# Make predictions
+y_pred = pipeline.predict(X_test)
+
+# Evaluate the model
+accuracy = accuracy_score(y_test, y_pred)
+accuracy
+
+# Efficient Re-Training using warm start
+# Add more trees to the existing RandomForestClassifier
+pipeline.named_steps['classifier'].n_estimators += 10
+
+# Re-train the pipeline with the additional trees
+pipeline.fit(X_train, y_train)
+
+# Make new predictions
+y_pred_new = pipeline.predict(X_test)
+
+# Evaluate the model again
+new_accuracy = accuracy_score(y_test, y_pred_new)
+print(new_accuracy)
+```
+
+## 5. Taking Control of Cross-Validation—The Flexibility of Predefined Split
+
+While k-fold and stratified k-fold cross-validation are widely used, they might not always be the perfect fit for your project. Scikit-learn's **PredefinedSplit** class empowers you to define a custom data splitting scheme, giving you granular control over the cross-validation process.
+
+This is particularly useful when you need to enforce specific data distributions in your training and test sets, or when dealing with time series data where temporal dependencies need to be considered. **PredefinedSplit puts you in the driver's seat, allowing you to tailor the cross-validation strategy to the unique requirements of your project**.
+
+```python title="predefined_split.py"
+from sklearn.model_selection import PredefinedSplit, cross_val_score
+import numpy as np
+
+# Generate a synthetic dataset
+X, y = make_classification(n_samples=1000, n_features=20, n_informative=10, n_redundant=10, random_state=42)
+
+# Create a predefined split: -1 for training, 0 for validation
+test_fold = np.zeros(X.shape[0])
+test_fold[:800] = -1  # First 800 samples for training
+test_fold[800:] = 0   # Last 200 samples for validation
+
+# Create the PredefinedSplit object
+ps = PredefinedSplit(test_fold)
+
+# Define the feature agglomeration
+feature_agglomeration = FeatureAgglomeration(n_clusters=10)
+
+# Create a pipeline that combines feature scaling, feature agglomeration, and a classifier
+pipeline = Pipeline([
+    ('scaler', StandardScaler()),
+    ('feature_agglomeration', feature_agglomeration),
+    ('classifier', RandomForestClassifier(random_state=42))
+])
+
+# Evaluate the model using cross-validation with the predefined split
+scores = cross_val_score(pipeline, X, y, cv=ps)
+
+# Display the cross-validation scores
+print(scores)
+```
+
+## 6. Exploring the Cutting Edge—Accessing Experimental Features
+
+Scikit-learn is constantly evolving, with new features being developed and added regularly. Some of these features are marked as experimental and require an extra step to enable them. While these features might not be production-ready, they offer a glimpse into the future of Scikit-learn and a chance to experiment with cutting-edge techniques.
+
+For example, the **IterativeImputer** and **HalvingRandomSearchCV** are currently in the experimental phase. By enabling these experimental features, you can stay ahead of the curve and explore the latest advancements in machine learning.
+
+```python title="experimental_features.py"
+from sklearn.experimental import enable_iterative_imputer  # noqa
+from sklearn.impute import IterativeImputer
+from sklearn.experimental import enable_halving_search_cv  # noqa
+from sklearn.model_selection import HalvingRandomSearchCV
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.datasets import make_classification
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+
+# Generate a synthetic dataset
+X, y = make_classification(n_samples=1000, n_features=20, n_informative=10, n_redundant=10, random_state=42)
+
+# Define the IterativeImputer
+iterative_imputer = IterativeImputer(random_state=42)
+
+# Create a pipeline that combines feature scaling, iterative imputation, and a classifier
+pipeline = Pipeline([
+    ('scaler', StandardScaler()),
+    ('imputer', iterative_imputer),
+    ('classifier', RandomForestClassifier(random_state=42))
+])
+
+# Define the parameter grid for HalvingRandomSearchCV
+param_grid = {
+    'classifier__n_estimators': [50, 100, 200],
+    'classifier__max_features': ['auto', 'sqrt', 'log2']
+}
+
+# Create the HalvingRandomSearchCV object
+halving_search = HalvingRandomSearchCV(pipeline, param_grid, random_state=42)
+
+# Fit the model using HalvingRandomSearchCV
+halving_search.fit(X, y)
+
+# Display the best parameters found
+halving_search.best_params_
+```
+
+## 7. Adapting to Evolving Data—Embracing Incremental Learning
+
+In scenarios where data flows in continuously or data distributions shift over time, **incremental learning** (also known as online learning) becomes critical. Scikit-learn provides support for this paradigm through the `partial_fit` method available in various algorithms.
+
+This method enables model training to happen in batches, allowing your models to adapt to new data without forgetting the knowledge acquired from previous data. You can incrementally train models like SGDClassifier and even perform preprocessing steps like StandardScaler in an incremental fashion.
+
+```python title="incremental_learning.py"
+from sklearn.linear_model import SGDClassifier
+from sklearn.preprocessing import StandardScaler
+from sklearn.datasets import make_classification
+import numpy as np
+
+# Generate a synthetic dataset
+X, y = make_classification(n_samples=1000, n_features=20, n_informative=10, n_redundant=10, random_state=42)
+
+# Split the data into batches
+n_batches = 10
+X_batches = np.array_split(X, n_batches)
+y_batches = np.array_split(y, n_batches)
+
+# Initialize the incremental scaler and classifier
+scaler = StandardScaler()
+classifier = SGDClassifier(random_state=42)
+
+# Incrementally fit the model
+for X_batch, y_batch in zip(X_batches, y_batches):
+    X_batch = scaler.partial_fit(X_batch).transform(X_batch)
+    classifier.partial_fit(X_batch, y_batch, classes=np.unique(y))
+
+# After training, you can use the classifier to make predictions
+# Example: Predict on the last batch
+X_last_batch = scaler.transform(X_batches[-1])
+predictions = classifier.predict(X_last_batch)
+
+# Display the predictions
+predictions
+```
+
+## Conclusion
+
+Scikit-learn's widely known functionalities form a solid foundation for machine learning tasks. However, by exploring its "hidden gems," you unlock a new level of mastery, enabling you to build more efficient workflows, develop better-performing models, and stay at the forefront of innovation in the field of machine learning.

@@ -29,6 +29,7 @@
     "reading-time-estimator": "^1.11.0",
     "rehype-external-links": "^3.0.0",
     "rehype-katex": "^7.0.1",
+    "rehype-line-count": "^1.0.0",
     "rehype-prism-plus": "^2.0.0",
     "remark-kbd-nested": "^0.6.1",
     "remark-math": "^6.0.0",
