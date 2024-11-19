@@ -1,7 +1,9 @@
+import Link from "next/link"
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
-import Link from "next/link"
 import * as RemixIcons from "@remixicon/react"
+
+import { readingTime } from "reading-time-estimator"
 
 import defaultMdxComponents from "fumadocs-ui/mdx"
 import { InlineTOC } from "fumadocs-ui/components/inline-toc"
@@ -24,6 +26,15 @@ export default async function BlogPage(props: {
   const page = blog.getPage([params.slug])
 
   if (!page) notFound()
+
+  const structuredData = page.data.structuredData.contents
+  const extractedData = structuredData.map((section: { heading?: string; content: string }) => ({
+    heading: section.heading || "Default Heading",
+    content: section.content,
+  }))
+
+  const content = extractedData.map((section) => section.content).join(" ")
+  const estimatedReadingTime = readingTime(content, 100).text
 
   const getIcon = (platform: string) => {
     switch (platform.toLowerCase()) {
@@ -55,7 +66,7 @@ export default async function BlogPage(props: {
             See more posts
           </Link>
         </div>
-        <article className="container flex flex-col px-0 py-8 lg:flex-row lg:px-48">
+        <article className="container flex flex-col px-0 py-8 md:px-24 lg:flex-row lg:px-48">
           <div className="prose min-w-0 flex-1 p-4">
             <page.data.body
               components={{
@@ -105,6 +116,10 @@ export default async function BlogPage(props: {
               <p className="font-medium">
                 {new Date(page.data.date ?? page.file.name).toDateString()}
               </p>
+            </div>
+            <div>
+              <p className="mb-1 text-sm text-fd-muted-foreground">Reading time</p>
+              <p className="font-medium">{estimatedReadingTime}</p>
             </div>
             <Control url={page.url} />
             <div className="sticky top-16 text-sm md:text-base lg:text-base">
