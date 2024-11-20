@@ -6,6 +6,8 @@
   "pages": [
     "---Welcome---",
     "index",
+    "---Projects---",
+    "./projects/sonispect",
     "---Project Structures---",
     "./project-structures/machine-learning"
   ]
