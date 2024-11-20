@@ -1,0 +1,146 @@
+---
+title: Sonispect
+---
+
+In the vast ocean of musical genres, each wave carries its unique rhythm, harmony, and emotion. But what if we could classify these waves with the precision of a seasoned audiophile? That’s the question that inspired my latest project: a sophisticated system for classifying 10 different music genres using advanced audio signal processing techniques.
+
+<Callout type="info" title="See it in Action!">
+  Check out the whole project on GitHub: [Sonispect](https://github.com/aelluminate-labs/sonispect)
+</Callout>
+
+
+## The Symphony of Technology and Music
+
+At the heart of this project lies the **Mel Frequency Cepstral Coefficients (MFCC)**, a powerful tool for feature extraction in audio processing. MFCCs allow us to distill the essence of a sound wave into a set of coefficients that capture the most informative frequencies. This is akin to extracting the soul of a melody, making it possible to compare and classify different genres with remarkable accuracy.
+
+## The Code Behind the Melody
+
+Let’s take a closer look at the code that makes this magic happen. The project is structured into several key components, each playing a crucial role in the classification process.
+
+### 1. Feature Extraction—The Melody Miner
+
+The `FeatureExtractor` class is where the magic begins. This class is responsible for segmenting audio signals, identifying frequencies, and separating linguistic content from noise. The `extract_mfcc` method uses the `python_speech_features` library to compute MFCCs, which are then transformed into mean matrices and covariance matrices. These matrices are the building blocks of our feature vectors, capturing the essence of each audio file.
+
+```python 
+class FeatureExtractor:
+    def extract_mfcc(self, audio_path: str) -> Tuple[np.ndarray, np.ndarray]:
+        rate, sig = wav.read(audio_path)
+        mfcc_feat = mfcc(sig, rate, winlen=self.window_length, appendEnergy=False, nfft=1024)
+        covariance = np.cov(np.matrix.transpose(mfcc_feat))
+        mean_matrix = mfcc_feat.mean(0)
+        return mean_matrix, covariance
+```
+
+### 2. Training the Model—The Conductor’s Baton
+
+With our features extracted, the next step is to train our model. The `KNNClassifier` class implements the k-nearest neighbors algorithm, a simple yet effective method for classification. The `fit` method trains the classifier by storing the training data, while the `predict` method uses the trained model to make predictions on new data.
+
+```python
+class KNNClassifier:
+    def fit(self, training_data: List[Tuple]):
+        self.training_data = training_data
+
+    def predict(self, instances: List[Tuple]) -> List:
+        return [self.predict_single(instance) for instance in instances]
+```
+
+### 3. Data Loading—The Orchestra Pit
+
+The `DataLoader` class handles the loading and splitting of our dataset. It reads the feature vectors from a pickle file and splits them into training and test sets. This ensures that our model is trained on a diverse and representative sample of the data.
+
+```python
+class DataLoader:
+    @staticmethod
+    def load_dataset(filename: str, split: Optional[float] = None, model_type: str = "knn") -> Tuple[List, List]:
+        dataset = []
+        with open(filename, 'rb') as f:
+            while True:
+                try:
+                    if model_type == "nn":
+                        feature, label = pickle.load(f)
+                        dataset.append((feature, label))
+                    else:
+                        mean_matrix, covariance, label = pickle.load(f)
+                        dataset.append((mean_matrix, covariance, label))
+                except EOFError:
+                    break
+        if split is None:
+            return dataset, []
+        training_set = []
+        test_set = []
+        for data in dataset:
+            if np.random.random() < split:
+                training_set.append(data)
+            else:
+                test_set.append(data)
+        return training_set, test_set
+```
+
+### 4. Metrics—The Critic’s Pen
+
+Finally, the `Metrics` class provides a method to calculate the accuracy of our model’s predictions. This is crucial for evaluating the performance of our classifier and ensuring that it meets our expectations.
+
+```python
+class Metrics:
+    @staticmethod
+    def accuracy(test_set: List, predictions: List) -> float:
+        correct = sum(1 for x in range(len(test_set)) if test_set[x][-1] == predictions[x])
+        return correct / len(test_set)
+```
+
+### 5. The Grand Finale—Training and Testing
+
+The `knn_train.py` script ties everything together. It initializes the feature extractor, processes the audio files, loads the dataset, trains the KNN model, and finally, evaluates the model’s accuracy.
+
+```python 
+def main():
+    print("Extracting features...")
+    extractor = FeatureExtractor(window_length=Config.WINDOW_LENGTH)
+    extractor.process_directory(Config.DATA_DIR, Config.FEATURES_FILE_KNN, model_type="knn")
+    
+    print("Loading dataset...")
+    training_set, test_set = DataLoader.load_dataset(Config.FEATURES_FILE_KNN, Config.TRAIN_SPLIT, model_type="knn")
+    
+    print("Training model and making predictions...")
+    classifier = KNNClassifier(k_neighbors=Config.K_NEIGHBORS)
+    classifier.fit(training_set)
+
+    print("Saving model...")
+    joblib.dump(classifier, Config.MODEL_SAVE_PATH_KNN)
+    print(f"Model saved at {Config.MODEL_SAVE_PATH_KNN}")
+
+    predictions = classifier.predict(test_set)
+    
+    accuracy = Metrics.accuracy(test_set, predictions)
+    print(f"Model Accuracy: {accuracy * 100:.2f}%")
+```
+
+## About the Dataset
+
+The GTZAN genre collection dataset was collected in 2000-2001. It consists of 1000 audio files each having 30 seconds duration. There are 10 classes (10 music genres) each containing 100 audio tracks. Each track is in .wav format. It contains audio files of the following 10 genres: **Blues**, **Classical**, **Country**, **Disco**, **Hiphop**, **Jazz**, **Metal**, **Pop**, **Reggae**, **Rock**
+
+### Content
+
+- **genres original** - A collection of 10 genres with 100 audio files each, all having a length of 30 seconds (the famous GTZAN dataset, the MNIST of sounds)
+
+- **images original** - A visual representation for each audio file. One way to classify data is through neural networks. Because NNs (like CNN, what we will be using today) usually take in some sort of image representation, the audio files were converted to Mel Spectrograms to make this possible.
+
+- **2 CSV files** - Containing features of the audio files. One file has for each song (30 seconds long) a mean and variance computed over multiple features that can be extracted from an audio file. The other file has the same structure, but the songs were split before into 3 seconds audio files (this way increasing 10 times the amount of data we fuel into our classification models). With data, more is always better.
+
+## Model Performance
+
+| Model | Version | Accuracy | Loss | File | Configurations | Remarks | 
+| --- | --- | --- | --- | --- | --- | --- |
+| KNN | v1 | **70.91%** | - | [knn_train.py](/src/training/knn_train.py) | `TRAIN_SPLIT=0.66`, `WINDOW_LENGHT=0.022`, `K_NEIGHBORS=5` | - |
+| SVM (multi-class) | v1 | 58.24% | - | [svm_train.py](/src/training/svm_train.py) | `SVM_KERNEL="rbf`, `SVM_C=1.0`, `SVM_GAMMA="scale"`, `TRAIN_SPLIT=0.66`, `WINDOW_LENGTH=0.020` | - |
+| NN | v1 | 56.28% | 4.1078  | [nn_train.py](/src/training/nn_train.py) | `TRAIN_SPLIT_NN=0.8`, `NN_EPOCHS=50`, `NN_BATCH_SIZE=32`, `NN_LEARNING_RATE=0.001`, `NN_HIDDEN_UNITS=[128, 64]`, `NUM_CLASSES=10` | - |
+| NN | v2 | **70.41%** | 1.6374 | - | - | Added Dropout, Batch Normalization, and Early Stopping |
+
+## What's Next?
+
+This project is just the beginning. With the foundation laid, the possibilities are endless. Future iterations could explore more sophisticated models, such as Support Vector Machines (SVM) or Neural Networks (NN), to further refine the classification accuracy. Additionally, expanding the dataset to include more genres or even individual artists could provide even deeper insights into the world of music.
+
+In the end, this project isn’t just about classifying music genres—it’s about understanding the intricate patterns that make each genre unique. It’s about using technology to unlock the hidden melodies that lie within every song. And who knows? Maybe one day, our models will be able to predict the next big hit before it even hits the airwaves.
+
+So, here’s to the future of music classification—where every note, every beat, and every harmony is a step closer to understanding the symphony of sound.
+
