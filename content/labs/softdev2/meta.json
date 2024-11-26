@@ -1,0 +1,10 @@
+{
+  "title": "Introduction to Data Science",
+  "icon": "Biohazard",
+  "root": true,
+  "pages": [
+    "index",
+    "---Week 1: Introduction---",
+    "/week-1/mystery-of-the-missing-cookies"
+  ]
+}

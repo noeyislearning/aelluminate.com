@@ -2,7 +2,6 @@
   "title": "Introduction to SQL",
   "icon": "DatabaseZap",
   "root": true,
-  "description": "Learn how to use SQL.",
   "pages": [
     "index",
     "introduction",

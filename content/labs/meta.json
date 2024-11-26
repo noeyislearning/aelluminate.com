@@ -6,7 +6,9 @@
   "pages": [
     "---Welcome---",
     "index",
-    "---Project Structures---",
-    "./project-structures/machine-learning"
+    "---Courses---",
+    "./introduction-to-sql",
+    "---Lessons---",
+    "./softdev2"
   ]
 }
